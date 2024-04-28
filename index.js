@@ -28,8 +28,13 @@ async function run() {
 
         app.post('/tourists-spot', async (req, res) => {
             const newTouristsSpot = req.body;
-            console.log(newTouristsSpot);
             const result = await touristsSpotCollection.insertOne(newTouristsSpot);
+            res.send(result);
+        })
+
+        app.get('/tourists-spot', async (req, res) => {
+            const cursor = touristsSpotCollection.find();
+            const result = await cursor.toArray();
             res.send(result);
         })
 
