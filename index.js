@@ -40,7 +40,6 @@ async function run() {
                 const result = await cursor.toArray();
                 res.send(result);
             } else if (req.query.email) {
-                console.log(req.query.email);
                 const email = req.query.email;
                 const query = { userEmail: email }
                 const cursor = touristsSpotCollection.find(query);
@@ -57,6 +56,36 @@ async function run() {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const result = await touristsSpotCollection.deleteOne(query);
+            res.send(result);
+        })
+
+        app.get('/tourists-spot/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await touristsSpotCollection.findOne(query);
+            res.send(result);
+        })
+
+        app.put('/tourists-spot/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) }
+            const options = { upsert: true };
+            const updateTouristsSpot = req.body;
+
+            const touristsSpot = {
+                $set: {
+                    image: updateTouristsSpot.image,
+                    tourists_spot_name: updateTouristsSpot.tourists_spot_name,
+                    country_Name: updateTouristsSpot.country_Name,
+                    short_description: updateTouristsSpot.short_description,
+                    average_cost: updateTouristsSpot.average_cost,
+                    seasonality: updateTouristsSpot.seasonality,
+                    travel_time: updateTouristsSpot.travel_time,
+                    totalVisitorsPerYear: updateTouristsSpot.totalVisitorsPerYear
+                }
+            }
+
+            const result = await touristsSpotCollection.updateOne(filter, touristsSpot, options);
             res.send(result);
         })
 
