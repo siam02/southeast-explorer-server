@@ -25,6 +25,7 @@ async function run() {
         await client.connect();
 
         const touristsSpotCollection = client.db('touristsSpotDB').collection('touristsSpot');
+        const countryCollection = client.db('coffeeDB').collection('country');
 
         app.post('/tourists-spot', async (req, res) => {
             const newTouristsSpot = req.body;
@@ -87,6 +88,13 @@ async function run() {
 
             const result = await touristsSpotCollection.updateOne(filter, touristsSpot, options);
             res.send(result);
+        })
+
+
+        app.get('/country', async (req, res) => {
+            const cursor = countryCollection.find();
+            const countries = await cursor.toArray();
+            res.send(countries);
         })
     }
     finally {
