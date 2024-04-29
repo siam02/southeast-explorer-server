@@ -96,6 +96,19 @@ async function run() {
             const countries = await cursor.toArray();
             res.send(countries);
         })
+
+        app.post('/country', async (req, res) => {
+            const newCountry = req.body;
+            const result = await countryCollection.insertOne(newCountry);
+            res.send(result);
+        })
+
+        app.delete('/country/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) }
+            const result = await countryCollection.deleteOne(query);
+            res.send(result);
+        })
     }
     finally {
 
