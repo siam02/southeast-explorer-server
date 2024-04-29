@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 });
 
 async function run() {
-    try{
+    try {
         await client.connect();
 
         const touristsSpotCollection = client.db('touristsSpotDB').collection('touristsSpot');
@@ -33,15 +33,30 @@ async function run() {
         })
 
         app.get('/tourists-spot', async (req, res) => {
-            const cursor = touristsSpotCollection.find();
-            const result = await cursor.toArray();
-            res.send(result);
+
+            if (req.query.sortOrder) {
+                const sortOrder = req.query.sortOrder || "desc";
+                const cursor = touristsSpotCollection.find().sort({ average_cost: sortOrder });
+                const result = await cursor.toArray();
+                res.send(result);
+            } else if (req.query.email) {
+                console.log(req.query.email);
+                const email = req.query.email;
+                const query = { userEmail: email }
+                const cursor = touristsSpotCollection.find(query);
+                const result = await cursor.toArray();
+                res.send(result);
+            } else {
+                const cursor = touristsSpotCollection.find();
+                const result = await cursor.toArray();
+                res.send(result);
+            }
         })
 
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     }
-    finally{
+    finally {
 
     }
 }
