@@ -88,9 +88,6 @@ async function run() {
             const result = await touristsSpotCollection.updateOne(filter, touristsSpot, options);
             res.send(result);
         })
-
-        await client.db("admin").command({ ping: 1 });
-        console.log("Pinged your deployment. You successfully connected to MongoDB!");
     }
     finally {
 
