@@ -46,6 +46,12 @@ async function run() {
                 const cursor = touristsSpotCollection.find(query);
                 const result = await cursor.toArray();
                 res.send(result);
+            }else if (req.query.country_Name) {
+                const country_Name = req.query.country_Name;
+                const query = { country_Name: country_Name }
+                const cursor = touristsSpotCollection.find(query);
+                const result = await cursor.toArray();
+                res.send(result);
             } else {
                 const cursor = touristsSpotCollection.find();
                 const result = await cursor.toArray();
