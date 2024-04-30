@@ -25,7 +25,7 @@ async function run() {
         // await client.connect();
 
         const touristsSpotCollection = client.db('touristsSpotDB').collection('touristsSpot');
-        const countryCollection = client.db('coffeeDB').collection('country');
+        const countryCollection = client.db('touristsSpotDB').collection('country');
 
         app.post('/tourists-spot', async (req, res) => {
             const newTouristsSpot = req.body;
