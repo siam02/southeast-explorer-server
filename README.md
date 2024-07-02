@@ -9,6 +9,11 @@ Welcome to the backend repository of Southeast Explorer, your go-to platform for
 - **User Data Management**: Store and manage user-specific data.
 - **Environment Variables**: Safeguard sensitive Firebase config keys and MongoDB credentials with environment variables.
 
+## Technologies Used
+- ExpressJS
+- MongoDB
+- Cors
+
 ## Installation
 
 1. Clone the repository:
