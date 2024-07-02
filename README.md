@@ -26,8 +26,9 @@ npm install
 
 3. Create a .env file in the root directory and add your MongoDB credentials:
 
- ```bash
-MONGODB_URI=your-mongodb-uri
+ ```env
+DB_USER=your-mongodb-user
+DB_PASS=your-mongodb-pass
 ```
 
 4. Start the development server:
