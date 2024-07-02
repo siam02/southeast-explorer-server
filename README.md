@@ -20,7 +20,7 @@ git clone https://github.com/siam02/southeast-explorer-server.git
 2. Install dependencies:
 
 ```bash
-cd southeast-explorer-backend
+cd southeast-explorer-server
 npm install
 ```
 
